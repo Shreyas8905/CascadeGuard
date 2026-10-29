@@ -1,0 +1,14 @@
+image:
+  repository: YOUR_REGISTRY/syscall-collector
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+endpoint: ""
+existingTokenSecret: ""
+existingTokenSecretKey: token
+resources:
+  requests: { cpu: 100m, memory: 128Mi }
+  limits: { cpu: "1", memory: 512Mi }
+nodeSelector:
+  kubernetes.io/os: linux
+tolerations:
+  - operator: Exists

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: syscall-collector
+description: Node-level Linux eBPF syscall telemetry collector
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

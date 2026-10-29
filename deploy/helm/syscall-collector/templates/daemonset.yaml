@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "syscall-collector.fullname" . }}
+  labels: { app.kubernetes.io/name: syscall-collector }
+spec:
+  selector:
+    matchLabels: { app.kubernetes.io/name: syscall-collector }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: syscall-collector }
+    spec:
+      hostPID: true
+      containers:
+        - name: collector
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - "--host-id=$(NODE_NAME)"
+            - "--batch-size=256"
+            - "--flush-interval=250ms"
+            {{- if .Values.endpoint }}
+            - "--endpoint={{ .Values.endpoint }}"
+            {{- end }}
+          env:
+            - name: NODE_NAME
+              valueFrom: { fieldRef: { fieldPath: spec.nodeName } }
+            {{- if .Values.existingTokenSecret }}
+            - name: INGEST_TOKEN
+              valueFrom:
+                secretKeyRef: { name: {{ .Values.existingTokenSecret }}, key: {{ .Values.existingTokenSecretKey }} }
+            {{- end }}
+          securityContext:
+            runAsUser: 0
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              add: ["BPF", "PERFMON", "SYS_RESOURCE"]
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+      nodeSelector: {{- toYaml .Values.nodeSelector | nindent 8 }}
+      tolerations: {{- toYaml .Values.tolerations | nindent 8 }}
