@@ -1,0 +1,70 @@
+{
+  "evaluation_time_utc": "2026-10-30T05:43:09.495542+00:00",
+  "bundle": "/workspaces/CascadeGuard/model_code/artifacts/cascadeguard_tier3.joblib",
+  "dataset": "ADFA-LD",
+  "evaluation_protocol": "held-out attack traces and held-out validation-normal traces; test traces excluded from reference graph and threshold calibration",
+  "n_test": 4083,
+  "n_normal": 3972,
+  "n_attack": 111,
+  "accuracy": 0.5936811168258633,
+  "precision_attack": 0.059726962457337884,
+  "recall_attack": 0.9459459459459459,
+  "f1_attack": 0.11235955056179775,
+  "confusion_matrix": {
+    "labels": [
+      "normal",
+      "attack"
+    ],
+    "matrix": [
+      [
+        2319,
+        1653
+      ],
+      [
+        6,
+        105
+      ]
+    ],
+    "tn": 2319,
+    "fp": 1653,
+    "fn": 6,
+    "tp": 105
+  },
+  "specificity": 0.5838368580060423,
+  "false_positive_rate": 0.4161631419939577,
+  "false_negative_rate": 0.05405405405405406,
+  "roc_auc": 0.7456780798925814,
+  "pr_auc_average_precision": 0.05438686646875283,
+  "classification_report": {
+    "normal": {
+      "precision": 0.9974193548387097,
+      "recall": 0.5838368580060423,
+      "f1-score": 0.7365412101000477,
+      "support": 3972.0
+    },
+    "attack": {
+      "precision": 0.059726962457337884,
+      "recall": 0.9459459459459459,
+      "f1-score": 0.11235955056179775,
+      "support": 111.0
+    },
+    "accuracy": 0.5936811168258633,
+    "macro avg": {
+      "precision": 0.5285731586480238,
+      "recall": 0.7648914019759941,
+      "f1-score": 0.42445038033092275,
+      "support": 4083.0
+    },
+    "weighted avg": {
+      "precision": 0.9719273500495028,
+      "recall": 0.5936811168258633,
+      "f1-score": 0.7195722744623436,
+      "support": 4083.0
+    }
+  },
+  "limitations": [
+    "ADFA-LD is not Kubernetes workload telemetry; results do not establish Kubernetes intrusion-detection performance.",
+    "The inference path uses an experimental augmented reference graph and recomputes graph propagation per escalated trace.",
+    "Attack probability is a model score; calibration on this dataset does not guarantee calibrated operational risk."
+  ]
+}

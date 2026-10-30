@@ -1,0 +1,37 @@
+{
+  "format": "cascadeguard-tier3-bundle",
+  "bundle_version": 1,
+  "created_utc": "2026-10-30T05:26:13.699013+00:00",
+  "bundle_file": "cascadeguard_tier3.joblib",
+  "thresholds": {
+    "L_low": 0.5330508474576271,
+    "L": 0.6271186440677966,
+    "L_low_mem": 0.5147503435639028,
+    "L_mem": 0.6055886394869445
+  },
+  "config": {
+    "tau": 0.9,
+    "propagation_k": 2,
+    "rare_tau": 0.3,
+    "n_chunks": 3,
+    "ewma_alpha": 0.5,
+    "feature_definition": "normalized token histogram + clipped length/1000 + Tier0 distance; rare histogram auxiliary channel",
+    "syscall_ids_are_strings": true
+  },
+  "training_summary": {
+    "normal_training_traces": 833,
+    "attack_training_traces": 524,
+    "normal_calibration_traces": 400,
+    "attack_calibration_traces": 111,
+    "attack_test_traces_reserved": 111,
+    "normal_test_traces_reserved": 3972,
+    "split_seed": 42,
+    "calibration_attack_fraction": 0.15,
+    "test_attack_fraction": 0.15,
+    "baseline_exemplars": 200,
+    "reference_graph_nodes": 1357,
+    "threshold_calibration": "labeled G-Means sweep on held-out ADFA-LD normal/attack traces"
+  },
+  "research_status": "experimental_offline_reference_graph",
+  "note": "Experimental ADFA-LD research artifact; not a production Kubernetes model validation claim."
+}
